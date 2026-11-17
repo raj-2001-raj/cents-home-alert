@@ -1,0 +1,11 @@
+{
+  "ntfy_topic": "cents-home-CHANGE-ME-to-something-random",
+  "telegram_bot_token": "",
+  "telegram_chat_id": "",
+  "mac_notify": true,
+  "mac_open_booking_page": true,
+  "reminder_minutes": 10,
+  "max_reminders": 3,
+  "fail_alert_after": 10,
+  "daily_summary_hour": 9
+}

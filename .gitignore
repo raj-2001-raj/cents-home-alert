@@ -1,0 +1,8 @@
+# Your private alert settings (ntfy topic, Telegram token). Never commit.
+config.json
+# Contains your email addresses and ntfy topic; it lives in your Google account instead.
+google_apps_script.gs
+*.log
+*.tmp
+__pycache__/
+.DS_Store

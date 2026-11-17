@@ -1,0 +1,46 @@
+# 24/7 backup runner: checks the CEnT-S calendar every ~5 minutes even when your Mac is off.
+# Free in a public repository. Alert settings come from repository secrets:
+#   NTFY_TOPIC (required), EMAIL_TO (comma-separated, optional),
+#   TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID (optional).
+name: CENT@HOME monitor
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"   # GitHub's minimum; runs can start a few minutes late
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cents-monitor
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check calendar
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          MONITOR_SOURCE: GitHub
+          DAILY_SUMMARY_HOUR: "off"   # the Google runner sends the daily note
+        run: python3 cents_monitor.py
+
+      # Remember what was already alerted, so the next run doesn't repeat it.
+      - name: Save state
+        if: always()
+        run: |
+          if [ -f state.json ] && [ -n "$(git status --porcelain -- state.json)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add state.json
+            git commit -m "Update monitor state" --quiet
+            git pull --rebase --quiet && git push --quiet
+          fi
