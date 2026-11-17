@@ -10,7 +10,7 @@ Calendar watched: https://testcisia.it/calendario.php?tolc=cents&l=gb&lingua=ing
 
 | Runner | Works when your computer is off | Checks | Alerts |
 |---|---|---|---|
-| **Google Apps Script** (main) | Yes | every 1 min | Gmail + phone push |
+| **Google Apps Script** (main) | Yes | every 1 min | Gmail (Google's servers can't reach ntfy, so no push) |
 | GitHub Actions (backup) | Yes | every ~5 min, can start late | phone push |
 | Mac (`install_mac.sh`) | No, only while awake | every 1 min | phone push + Mac popup, voice, opens booking page |
 
