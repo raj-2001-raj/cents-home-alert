@@ -1,7 +1,7 @@
 # 24/7 backup runner: checks the CEnT-S calendar every ~5 minutes even when your Mac is off.
 # Free in a public repository. Alert settings come from repository secrets:
-#   NTFY_TOPIC (required), EMAIL_TO (comma-separated, optional),
-#   TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID (optional).
+#   NTFY_TOPIC (required), TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID (optional).
+# Email alerts come from the Google Apps Script runner.
 name: CENT@HOME monitor
 
 on:
@@ -26,7 +26,6 @@ jobs:
       - name: Check calendar
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
-          EMAIL_TO: ${{ secrets.EMAIL_TO }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           MONITOR_SOURCE: GitHub

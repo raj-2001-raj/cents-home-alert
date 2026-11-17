@@ -55,7 +55,6 @@ DEFAULTS = {
     "ntfy_server": "https://ntfy.sh",
     "telegram_bot_token": "",
     "telegram_chat_id": "",
-    "email_to": [],                 # addresses emailed via ntfy.sh's free email relay
     "mac_notify": True,             # banner + spoken alert + popup (macOS only)
     "mac_open_booking_page": True,  # open the CISIA login page when seats appear
     "reminder_minutes": 10,         # repeat the seats alert while seats stay open...
@@ -112,8 +111,6 @@ def load_config(path: Path) -> dict:
     for env, key in ENV_OVERRIDES.items():
         if os.environ.get(env):
             cfg[key] = os.environ[env].strip()
-    if os.environ.get("EMAIL_TO"):
-        cfg["email_to"] = [a.strip() for a in os.environ["EMAIL_TO"].split(",") if a.strip()]
     if os.environ.get("DAILY_SUMMARY_HOUR"):
         value = os.environ["DAILY_SUMMARY_HOUR"].strip().lower()
         cfg["daily_summary_hour"] = None if value in ("off", "none", "no") else int(value)
@@ -294,8 +291,6 @@ class Notifier:
         out = []
         if self.cfg["ntfy_topic"]:
             out.append("ntfy")
-        if self.cfg["ntfy_topic"] and self.cfg["email_to"] and priority >= 3:  # no email for quiet notes
-            out.append("email")
         if self.cfg["telegram_bot_token"] and self.cfg["telegram_chat_id"]:
             out.append("telegram")
         if self.cfg["mac_notify"] and sys.platform == "darwin":
@@ -341,24 +336,6 @@ class Notifier:
             payload["click"] = BOOKING_URL
             payload["actions"] = [{"action": "view", "label": "Book now", "url": BOOKING_URL}]
         self._post_json(self.cfg["ntfy_server"].rstrip("/"), payload)
-
-    def _email(self, title, body, priority, tags, speak, open_booking):
-        # Separate topic so the email copies don't show up twice in the phone app.
-        failures = []
-        for address in self.cfg["email_to"]:
-            try:
-                self._post_json(self.cfg["ntfy_server"].rstrip("/"), {
-                    "topic": self.cfg["ntfy_topic"] + "-mail",
-                    "email": address,
-                    "title": title,
-                    "message": body + (f"\n\nBook: {BOOKING_URL}" if priority >= 4 else ""),
-                    "priority": priority,
-                    "tags": tags,
-                })
-            except Exception as e:
-                failures.append(f"{address}: {e}")
-        if failures:
-            raise RuntimeError("; ".join(failures))
 
     def _telegram(self, title, body, priority, tags, speak, open_booking):
         url = f"https://api.telegram.org/bot{self.cfg['telegram_bot_token']}/sendMessage"

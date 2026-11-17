@@ -11,7 +11,7 @@ Calendar watched: https://testcisia.it/calendario.php?tolc=cents&l=gb&lingua=ing
 | Runner | Works when your computer is off | Checks | Alerts |
 |---|---|---|---|
 | **Google Apps Script** (main) | Yes | every 1 min | Gmail + phone push |
-| GitHub Actions (backup) | Yes | every ~5 min, can start late | phone push + email |
+| GitHub Actions (backup) | Yes | every ~5 min, can start late | phone push |
 | Mac (`install_mac.sh`) | No, only while awake | every 1 min | phone push + Mac popup, voice, opens booking page |
 
 Each alert is tagged `[Google]`, `[GitHub]` or `[Mac]`, so with several runners you may get
@@ -52,11 +52,10 @@ max priority. Keep the topic private: anyone who knows it can read the alerts.
 ## 3. GitHub Actions (backup runner)
 
 1. Push this folder to a **public** repo (unlimited free minutes).
-2. Settings → Secrets and variables → Actions → add `NTFY_TOPIC` and
-   `EMAIL_TO` (comma-separated addresses).
+2. Settings → Secrets and variables → Actions → add `NTFY_TOPIC`.
 3. Actions → **CENT@HOME monitor** → **Run workflow** once.
 
-Emails from this runner come from ntfy.sh's free relay (`ntfy@ntfy.sh`); check spam the first time.
+This runner sends phone pushes only; emails come from the Google runner.
 
 ## 4. Mac runner
 
