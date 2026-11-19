@@ -1,16 +1,26 @@
 {
   "consecutive_failures": 0,
-  "last_success": "2026-11-19T05:28:33+01:00",
+  "last_success": "2026-11-19T14:46:31+01:00",
   "last_summary": "2026-11-17",
   "sessions": {
+    "inglese|CENT@HOME|Politecnico di Milano|MILANO|17/12/2026": {
+      "alerted_at": null,
+      "date": "17/12/2026",
+      "first_seen": "2026-11-19T14:46:31+01:00",
+      "reminders": 0,
+      "seats": "---",
+      "state": "sold_out",
+      "status": "NOT LONGER AVAILABLE",
+      "university": "Politecnico di Milano"
+    },
     "inglese|CENT@HOME|Politecnico di Milano|MILANO|26/11/2026": {
       "alerted_at": null,
       "date": "26/11/2026",
       "first_seen": "2026-11-17T10:20:16+01:00",
       "reminders": 0,
       "seats": "---",
-      "state": "sold_out",
-      "status": "NOT LONGER AVAILABLE",
+      "state": "other",
+      "status": "NOT BOOKABLE",
       "university": "Politecnico di Milano"
     },
     "inglese|CENT@HOME|Sapienza Università di Roma|ROMA|17/12/2026": {
