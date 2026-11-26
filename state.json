@@ -1,6 +1,6 @@
 {
   "consecutive_failures": 0,
-  "last_success": "2026-11-26T12:32:09+01:00",
+  "last_success": "2026-11-26T21:29:18+01:00",
   "last_summary": "2026-11-17",
   "sessions": {
     "inglese|CENT@HOME|Politecnico di Milano|MILANO|17/12/2026": {
@@ -14,14 +14,24 @@
       "university": "Politecnico di Milano"
     },
     "inglese|CENT@HOME|Politecnico di Milano|MILANO|26/11/2026": {
-      "alerted_at": null,
+      "alerted_at": "2026-11-26T21:29:18+01:00",
       "date": "26/11/2026",
       "first_seen": "2026-11-17T10:20:16+01:00",
       "reminders": 0,
-      "seats": "0",
-      "state": "other",
+      "seats": "11",
+      "state": "available",
       "status": "BOOKINGS CLOSED",
       "university": "Politecnico di Milano"
+    },
+    "inglese|CENT@HOME|Sapienza Università di Roma|ROMA|12/01/2027": {
+      "alerted_at": null,
+      "date": "12/01/2027",
+      "first_seen": "2026-11-26T21:29:18+01:00",
+      "reminders": 0,
+      "seats": "---",
+      "state": "sold_out",
+      "status": "NOT LONGER AVAILABLE",
+      "university": "Sapienza Università di Roma"
     },
     "inglese|CENT@HOME|Sapienza Università di Roma|ROMA|17/12/2026": {
       "alerted_at": null,
@@ -34,12 +44,12 @@
       "university": "Sapienza Università di Roma"
     },
     "inglese|CENT@HOME|Sapienza Università di Roma|ROMA|26/11/2026": {
-      "alerted_at": null,
+      "alerted_at": "2026-11-26T21:29:18+01:00",
       "date": "26/11/2026",
       "first_seen": "2026-11-17T10:20:16+01:00",
       "reminders": 0,
-      "seats": "0",
-      "state": "other",
+      "seats": "9",
+      "state": "available",
       "status": "BOOKINGS CLOSED",
       "university": "Sapienza Università di Roma"
     },
